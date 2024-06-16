@@ -17,12 +17,17 @@
 package com.example.android.dagger
 
 import android.app.Application
+import com.example.android.dagger.di.AppComponent
 import com.example.android.dagger.di.DaggerAppComponent
 
 open class MyApplication : Application() {
 
     // Instance of the AppComponent that will be used by all the Activities in the project
     val appComponent by lazy {
-        DaggerAppComponent.factory().create(applicationContext)
+        initializeComponent()
+    }
+
+    open fun initializeComponent(): AppComponent {
+        return DaggerAppComponent.factory().create(this)
     }
 }

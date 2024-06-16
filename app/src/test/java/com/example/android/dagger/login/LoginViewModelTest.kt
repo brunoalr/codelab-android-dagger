@@ -23,15 +23,17 @@ import org.junit.Assert.assertEquals
 import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
+import org.junit.runner.RunWith
 import org.mockito.ArgumentMatchers.anyString
 import org.mockito.Mockito.mock
 import org.mockito.Mockito.verify
+import org.mockito.junit.MockitoJUnitRunner
 import org.mockito.Mockito.`when` as whenever
 
+@RunWith(MockitoJUnitRunner::class)
 class LoginViewModelTest {
-
     // Executes each task synchronously using Architecture Components.
-    @get:Rule var instantExecutorRule = InstantTaskExecutorRule()
+    @get:Rule val instantExecutorRule = InstantTaskExecutorRule()
 
     private lateinit var viewModel: LoginViewModel
     private lateinit var userManager: UserManager
