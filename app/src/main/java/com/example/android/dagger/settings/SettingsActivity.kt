@@ -23,12 +23,18 @@ import androidx.appcompat.app.AppCompatActivity
 import com.example.android.dagger.MyApplication
 import com.example.android.dagger.R
 import com.example.android.dagger.login.LoginActivity
+import dagger.android.AndroidInjector
+import dagger.android.DispatchingAndroidInjector
+import dagger.android.HasAndroidInjector
 import javax.inject.Inject
 
-class SettingsActivity : AppCompatActivity() {
+class SettingsActivity : AppCompatActivity(), HasAndroidInjector {
 
     @Inject
     lateinit var settingsViewModel: SettingsViewModel
+
+    @Inject
+    lateinit var androidInjector: DispatchingAndroidInjector<Any>
 
     override fun onCreate(savedInstanceState: Bundle?) {
         // Gets the userManager from the application graph to obtain the instance
@@ -54,4 +60,6 @@ class SettingsActivity : AppCompatActivity() {
             startActivity(intent)
         }
     }
+
+    override fun androidInjector(): AndroidInjector<Any> = androidInjector
 }

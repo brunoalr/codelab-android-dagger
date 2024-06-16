@@ -26,13 +26,15 @@ import android.widget.EditText
 import android.widget.TextView
 import androidx.core.widget.doOnTextChanged
 import androidx.fragment.app.Fragment
-import com.example.android.dagger.MyApplication
 import com.example.android.dagger.R
 import com.example.android.dagger.registration.RegistrationActivity
 import com.example.android.dagger.registration.RegistrationViewModel
+import dagger.android.AndroidInjector
+import dagger.android.DispatchingAndroidInjector
+import dagger.android.HasAndroidInjector
 import javax.inject.Inject
 
-class EnterDetailsFragment : Fragment() {
+class EnterDetailsFragment : Fragment(), HasAndroidInjector {
 
     /**
      * RegistrationViewModel is used to set the username and password information (attached to
@@ -48,6 +50,9 @@ class EnterDetailsFragment : Fragment() {
 
     @Inject
     lateinit var enterDetailsViewModel: EnterDetailsViewModel
+
+    @Inject
+    lateinit var androidInjector: DispatchingAndroidInjector<Any>
 
     private lateinit var errorTextView: TextView
     private lateinit var usernameEditText: EditText
@@ -105,6 +110,8 @@ class EnterDetailsFragment : Fragment() {
             enterDetailsViewModel.validateInput(username, password)
         }
     }
+
+    override fun androidInjector(): AndroidInjector<Any> = androidInjector
 }
 
 sealed class EnterDetailsViewState

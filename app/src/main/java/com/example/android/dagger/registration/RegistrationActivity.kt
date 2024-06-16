@@ -34,9 +34,8 @@ class RegistrationActivity : AppCompatActivity() {
     lateinit var registrationComponent: RegistrationComponent
 
     override fun onCreate(savedInstanceState: Bundle?) {
-        // Creates an instance of Registration component by grabbing the factory from the app graph
-        registrationComponent = (application as MyApplication).appComponent.registrationComponent().create()
-        // Injects this activity to the just created registration component
+        registrationComponent =
+            (application as MyApplication).appComponent.registrationComponent().create()
         registrationComponent.inject(this)
 
         super.onCreate(savedInstanceState)

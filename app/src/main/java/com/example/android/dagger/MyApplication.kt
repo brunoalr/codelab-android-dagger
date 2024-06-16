@@ -16,18 +16,23 @@
 
 package com.example.android.dagger
 
-import android.app.Application
 import com.example.android.dagger.di.AppComponent
 import com.example.android.dagger.di.DaggerAppComponent
+import dagger.android.AndroidInjector
+import dagger.android.DaggerApplication
 
-open class MyApplication : Application() {
+open class MyApplication : DaggerApplication() {
 
     // Instance of the AppComponent that will be used by all the Activities in the project
     val appComponent by lazy {
         initializeComponent()
     }
 
-    open fun initializeComponent(): AppComponent {
+    protected open fun initializeComponent(): AppComponent {
         return DaggerAppComponent.factory().create(this)
+    }
+
+    override fun applicationInjector(): AndroidInjector<out MyApplication> {
+        return appComponent
     }
 }

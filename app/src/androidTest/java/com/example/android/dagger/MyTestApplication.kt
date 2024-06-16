@@ -18,9 +18,14 @@ package com.example.android.dagger
 
 import com.example.android.dagger.di.AppComponent
 import com.example.android.dagger.di.DaggerTestAppComponent
+import dagger.android.AndroidInjector
 
 class MyTestApplication : MyApplication() {
     override fun initializeComponent(): AppComponent {
         return DaggerTestAppComponent.create()
+    }
+
+    override fun applicationInjector(): AndroidInjector<out MyApplication> {
+        return initializeComponent()
     }
 }
